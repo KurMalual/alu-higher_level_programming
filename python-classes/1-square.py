@@ -1,22 +1,10 @@
 #!/usr/bin/python3
 """
-Module - 1-square
-Defines a class Square with a private instance attribute size
+THIS CODE CONTAINS NO MODULESL
 """
 
 
-class Square:
+class Square():
     """
-    A class Square with private instance attribute size
+    CLASS IS A SQUARE CLASS AND IS EMPTY
     """
-    def _init_(self, size):
-        """
-        Initialize a new Square with the given size
-
-        Args:
-        size (int): The size of the new square object.
-
-        Returns:
-        None
-        """
-        self.__size = size
