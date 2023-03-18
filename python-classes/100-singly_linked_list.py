@@ -1,4 +1,4 @@
-python-classes no 100: #!/usr/bin/python3
+#!/usr/bin/python3
 """Define classes for a singly-linked list."""
 
 
