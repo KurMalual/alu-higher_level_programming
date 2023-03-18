@@ -5,7 +5,7 @@
 class Node:
     """Represent a node in a singly-linked list."""
 
-    def __init__(self, data, next_node=None):
+    def _init_(self, data, next_node=None):
         """Initialize a new Node.
         Args:
             data (int): The data of the new Node.
@@ -41,7 +41,7 @@ class SinglyLinkedList:
     """Represent a singly-linked list."""
 
     def _init_(self):
-        """Initalize a new SinglyLinkedList."""
+        """Initialize a new SinglyLinkedList."""
         self.__head = None
 
     def sorted_insert(self, value):
