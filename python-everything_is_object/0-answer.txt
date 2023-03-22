@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print(type)
+My_object = "Hello, world!"
+print(type(My_object))
