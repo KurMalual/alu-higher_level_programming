@@ -1,6 +1,11 @@
 #!/usr/bin/python3
-"""Empty BaseGeometry class"""
+"""Checks object class"""
 
-class BaseGeometry:
-    """Class empty"""
-    pass
+
+def inherits_from(obj, a_class):
+    """Checks object class
+    Args:
+        - obj: object to class
+        - a_class: class to check
+    """
+    return isinstance(obj, a_class) and type(obj) != a_class
