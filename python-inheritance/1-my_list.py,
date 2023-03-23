@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """checks objec class"""
 
+
 def is_same)_class(obj,a_class):
   """Check object to class
   Args:
