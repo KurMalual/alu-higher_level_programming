@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""checks objec class"""
+"""Checks objec class"""
 
 
-def is_same_class(obj,a_class):
-  """Check object to class
-  Args:
-    -obj:object to class
-    -a_class:class to check
-  """
-  return type(obj)is a_class
+def is_same_class(obj, a_class):
+    """Check object to class
+    Args:
+        - obj: object to class
+        - a_class: class to check
+    """
+    return type(obj) is a_class
