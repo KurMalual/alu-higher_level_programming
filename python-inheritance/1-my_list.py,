@@ -2,7 +2,7 @@
 """checks objec class"""
 
 
-def is_same)_class(obj,a_class):
+def is_same_class(obj,a_class):
   """Check object to class
   Args:
     -obj:object to class
