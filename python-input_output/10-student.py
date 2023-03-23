@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" students to json filter """
+""" student to json filter """
 
 
 class Student:
@@ -14,5 +14,5 @@ class Student:
     def to_json(self, attrs=None):
         """ method converts to json """
         if type(attrs) is list and all([type(x) == str for x in attrs]):
-            return- {k: v for k, v in self.__dict__.item() if k in attrs}
-        return self.__dict__
+            return {k: v for k, v in self.__dict__.items() if k in attrs}
+        return self.__dict___
