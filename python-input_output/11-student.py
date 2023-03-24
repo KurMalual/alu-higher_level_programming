@@ -1,32 +1,18 @@
 #!/usr/bin/python3
-"""class_to_json"""
+""" student to json filter """
 
 
 class Student:
-    """Contains student data
-    """
+    """ this is a student class """
 
-    def _init_(self, first_name, last_name, age):
+    def __init__(self, first_name, last_name, age):
+        """ just doing init for variables """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """class_to_json"""
-
-        if attrs is None or type(attrs) != list:
-            return self._dict_
-        else:
-            temp = {}
-            for elem in attrs:
-                if type(elem) != str:
-                    return self._dict_
-                if elem in self._dict_.keys():
-                    temp[elem] = self._dict_[elem]
-            return temp
-
-    def reload_from_json(self, json):
-        """reload_from_json"""
-
-        for items in json.keys():
-            self._dict_[items] = json[items]
+        """ method converts to json """
+        if type(attrs) is list and all([type(x) == str for x in attrs]):
+            return {k: v for k, v in self.__dict__.items() if k in attrs}
+        return self.__dict__
