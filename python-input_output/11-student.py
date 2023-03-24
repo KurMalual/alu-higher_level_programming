@@ -1,26 +1,29 @@
 #!/usr/bin/python3
-"""class_to_json"""
+'''Task 11 module'''
 
 
 class Student:
-    """Contains student data
-    """
-
-    def _init_(self, first_name, last_name, age):
+    '''New class student'''
+    def __init__(self, first_name, last_name, age):
+        '''Constructor'''
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """class_to_json"""
+        '''JSON representaion of an instance'''
+        if attrs is None:
+            return self.__dict__
 
-        if attrs is None or type(attrs) != list:
-            return self._dict_
-        else:
-            temp = {}
-            for elem in attrs:
-                if type(elem) != str:
-                    return self._dict_
-                if elem in self._dict_.keys():
-                    temp[elem] = self._dict_[elem]
-            return temp
+        attrs_dict = {}
+        for att in self.__dict__:
+            if att in attrs:
+                attrs_dict[att] = self.__dict__[att]
+
+        return attrs_dict
+
+    def reload_from_json(self, json):
+        '''Replacing all attributes od a student insatnce'''
+        for att in json:
+            if att in set(self.__dict__.keys()):
+                self.__dict__[att] = json[att]
