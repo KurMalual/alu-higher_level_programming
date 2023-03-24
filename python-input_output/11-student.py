@@ -24,9 +24,3 @@ class Student:
                 if elem in self._dict_.keys():
                     temp[elem] = self._dict_[elem]
             return temp
-
-    def reload_from_json(self, json):
-        """reload_from_json"""
-
-        for items in json.keys():
-            self._dict_[items] = json[items]
