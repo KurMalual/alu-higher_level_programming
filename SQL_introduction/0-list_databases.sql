@@ -1,1 +1,1 @@
-mysql -u <username> -p -e "SHOW DATABASES;"
+SHOW DATABASES;
