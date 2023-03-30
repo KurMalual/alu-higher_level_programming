@@ -1,4 +1,6 @@
 -- a script that lists all the table of a database in your MySQL server.
+#!/bin/bash
+
 # Check if database name is provided as argument
 if [ $# -eq 0 ]
   then
