@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Python Script that takes in a URL, sends a request to the URL & displays the body of the response """
+"""
+Python Script that takes in a URL, sends a request to the URL
+& displays the body of the response
+"""
 import requests
 from sys import argv
 
