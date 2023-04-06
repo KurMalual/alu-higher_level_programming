@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Script that takes in a URL and an email, sends a POST and displays the body of the response """
+""" Script that takes in a URL and an email, sends a POST repuest
+And displays the body of the response
+"""
 
 import sys
 import urllib.parse
