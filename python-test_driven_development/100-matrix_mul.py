@@ -1,217 +1,67 @@
-=================================
-How to Use 101-lazy_matrix_mul.py
-=================================
-
-This module defines a matrix multiplication function
-``lazy_matrix_mul(m_a, m_b)``.
-
-Usage
-=====
-
-``lazy_matrix_mul(...)`` returns a new matrix representing the multiplication
-of ``m_a`` by ``m_b``.
-
-::
-
-    >>> lazy_matrix_mul = _import_('101-lazy_matrix_mul').lazy_matrix_mul
-    >>> m_a = [
-    ... [1, 2],
-    ... [3, 4],
-    ... ]
-    >>> m_b = m_a
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    [[ 7 10]
-     [15 22]]
-
-::
-
-    >>> m_a = [[1, 2]]
-    >>> m_b = [
-    ... [3, 4],
-    ... [5, 6]
-    ... ]
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    [[13 16]]
-
-The function also works with floating-point numbers.
-
-::
-
-    >>> m_a = [
-    ... [1.2, 5.5, 6.2],
-    ... [4.66, 12.3, -9.2]
-    ... ]
-    >>> m_b = [
-    ... [5.0, 3.3],
-    ... [-2.9, 4.4],
-    ... [7.2, 4.4]
-    ... ]
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    [[ 34.69   55.44 ]
-     [-78.61   29.018]]
-
-A minimum of two arguments must be provided.
-
-::
-
-    >>> print(lazy_matrix_mul(m_a))
-    Traceback (most recent call last):
-    TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
-
-::
-
-    >>> print(lazy_matrix_mul()) # doctest: +NORMALIZE_WHITESPACE
-    Traceback (most recent call last):
-    TypeError: lazy_matrix_mul() missing 2 required positional arguments: 
-    'm_a' and 'm_b'
-
-ValueErrors
-===========
-
-If two matrices cannot be multiplied (ie. the row count of ``m_a`` is not
-equal to the column count in ``m_b``), a ValueError is raised.
-
-::
-
-    >>> m_a = [
-    ... [1, 2],
-    ... [3, 4],
-    ... ]
-    >>> m_b = [
-    ... [1, 2],
-    ... [2, 3],
-    ... [4, 5]
-    ... ]
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    Traceback (most recent call last):
-    ValueError: shapes (2,2) and (3,2) not aligned: 2 (dim 1) != 3 (dim 0)
+#!/usr/bin/python3
+"""Defines a matrix multiplication function"""
 
 
-The parameters ``m_a`` and ``m_b`` cannot be empty. Otherwise, a ValueError
-is raised.
+def matrix_mul(m_a, m_b):
+    """Multiply two matrices by each other if not empty.
+    :param m_a: The first matrix
+    :type m_a: list of list of ints/floats
+    :param m_b: The second matrix
+    :type m_b: list of list of int/floats
+    :raise TypeError: If either m_a or m_b is not a list of list of ints/floats
+    :raise TypeError: If either m_a or m_b is empty.
+    :raise TypeError: If either m_a or m_b has different-sized rows
+    :raise ValueError: If m_a and m_b cannot be multiplied
+    :returns: A new matrix representing the multiplication of m_a by m_b.
+    :rtype: list of list of unt/floats
+    """
 
-::
 
-    >>> print(lazy_matrix_mul([[]], [[5, 6], [7, 8]]))
-    Traceback (most recent call last):
-    ValueError: shapes (1,0) and (2,2) not aligned: 0 (dim 1) != 2 (dim 0)
+    if m_a == [] or m_a == [[]]:
+        raise ValueError("m_a can't be empty")
+    if m_b == [] or m_b == [[]]:
+        raise ValueError("m_b can't be empty")
 
-::
+    if not isinstance(m_a, list):
+        raise TypeError("m_a must be a list")
+    if not isinstance(m_b, list):
+        raise TypeError("m_b must be a list")
 
-    >>> print(lazy_matrix_mul([[5, 6], [7, 8]], [[]]))
-    Traceback (most recent call last):
-    ValueError: shapes (2,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
+    if not all(isinstance(row, list) for row in m_a):
+        raise TypeError("m_a must be a list of lists")
+    if not all(isinstance(row, list) for row in m_b):
+        raise TypeError("m_b must be a list of lists")
 
-Invalid Matrices
-================
+    if not all((isinstance(ele, int) or isinstance(ele, float))
+               for ele in [num for row in m_a for num in row]):
+        raise TypeError("m_a should contain only integers or floats")
+    if not all((isinstance(ele, int) or isinstance(ele, float))
+               for ele in [num for row in m_b for num in row]):
+        raise TypeError("m_b should contain only integers or floats")
 
-The parameters ``m_a`` and ``m_b`` must be lists. If either parameter is
-not a list, a ValueError is raised.
+    if not all(len(row) == len(m_a[0]) for row in m_a):
+        raise TypeError("each row of m_a must should be of the same size")
+    if not all(len(row) == len(m_b[0]) for row in m_b):
+        raise TypeError("each row of m_b must should be of the same size")
 
-::
+    if len(m_a[0]) != len(m_b):
+        raise ValueError("m_a and m_b can't be multiplied")
 
-    >>> print(lazy_matrix_mul("not a list", [[1, 2]]))
-    Traceback (most recent call last):
-    ValueError: Scalar operands are not allowed, use '*' instead
+    inverted_b = []
+    for r in range(len(m_b[0])):
+        new_row = []
+        for c in range(len(m_b)):
+            new_row.append(m_b[c][r])
+        inverted_b.append(new_row)
 
-::
+    new_matrix = []
+    for row in m_a:
+        new_row = []
+        for col in inverted_b:
+            prod = 0
+            for i in range(len(inverted_b[0])):
+                prod += row[i] * col[i]
+            new_row.append(prod)
+        new_matrix.append(new_row)
 
-    >>> print(lazy_matrix_mul([[1, 2]], "also not a list"))
-    Traceback (most recent call last):
-    ValueError: Scalar operands are not allowed, use '*' instead
-
-::
-
-    >>> print(lazy_matrix_mul("not a list", "also not a list"))
-    Traceback (most recent call last):
-    ValueError: Scalar operands are not allowed, use '*' instead
-
-If either parameter is ``None``, a TypeError is raised.
-
-::
-
-    >>> print(lazy_matrix_mul(None, None))
-    Traceback (most recent call last):
-    TypeError: Object arrays are not currently supported
-
-Not just any list - they must be lists of lists! Otherwise, behavior is
-undefined.
-
-::
-
-    >>> print(lazy_matrix_mul([1, 2], [[3, 4]]))
-    Traceback (most recent call last):
-    ValueError: shapes (2,) and (1,2) not aligned: 2 (dim 0) != 1 (dim 0)
-
-::
-
-    >>> print(lazy_matrix_mul([[1, 2]], [3, 4]))
-    [11]
-
-::
-
-    >>> print(lazy_matrix_mul([1, 2], [3, 4]))
-    11
-
-And not just any list of lists - they must be lists of lists containing
-integers or floats! Otherwise, a ValueError or TypeError is raised
-
-::
-
-    >>> print(lazy_matrix_mul([[1, "non-number"]], [[3, 4]]))
-    Traceback (most recent call last):
-    ValueError: shapes (1,2) and (1,2) not aligned: 2 (dim 1) != 1 (dim 0)
-
-::
-
-    >>> print(lazy_matrix_mul([[5, 6], [7, 8]], [[5, "6"], [7, 8]]))
-    Traceback (most recent call last):
-    TypeError: invalid data type for einsum
-
-::
-
-    >>> print(lazy_matrix_mul([[1, "non-number"]], [[{"a": 1}, 8.8]]))
-    Traceback (most recent call last):
-    TypeError: Object arrays are not currently supported
-
-Finally, the length of all rows in matrices ``m_a`` and ``m_b`` should be
-equivalent. Otherwise, a ValueError is raised.
-
-::
-
-    >>> m_a = [
-    ... [1, 2],
-    ... [3, 4, 5]
-    ... ]
-    >>> m_b = [
-    ... [1, 2],
-    ... [3, 4]
-    ... ]
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    Traceback (most recent call last):
-    ValueError: setting an array element with a sequence.
-
-::
-
-    >>> m_a = [
-    ... [1, 2],
-    ... [3, 4]
-    ... ]
-    >>> m_b = [
-    ... [1, 2],
-    ... [3, 4, 5]
-    ... ]
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    Traceback (most recent call last):
-    ValueError: setting an array element with a sequence.
-
-::
-
-    >>> m_a = [
-    ... [1, 2],
-    ... [3, 4, 5]
-    ... ]
-    >>> m_b = m_a
-    >>> print(lazy_matrix_mul(m_a, m_b))
-    Traceback (most recent call last):
-    ValueError: setting an array element with a sequence.
+    return new_matrix
