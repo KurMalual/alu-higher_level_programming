@@ -1,4 +1,4 @@
 #!/usr/bin/node
-const first = 'Kur';
-const second = 'amazing';
+const first = 'Python';
+const second = 'fun';
 console.log(first + ' is ' + second);
