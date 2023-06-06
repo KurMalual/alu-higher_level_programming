@@ -2,5 +2,6 @@
 let firstNumber = 'C is fun'
 let secondNumber = 'python is cool'
 let thirdNumber = 'JavaScript is amazing'
-let allNumbers = firstNumber +", " + secondNumber +", " + thirdNumber
-console.log(allNumbers)
+console.log(firstNumber)
+console.log(secondNumber)
+console.log(thirdNumber)
