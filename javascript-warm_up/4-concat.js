@@ -1,10 +1,10 @@
 #!/usr/bin/node
-const first = 'Python';
-const second = 'fun';
-console.log(first + ' is ' + second);
-const third = 'HBTN';
-const fourth = 'undefined';
-console.log(third + ' is ' + fourth);
-const fifth = 'undefined';
-const sixth = 'undefined';
-console.log(fifth + ' is ' + sixth);
+function printArguments(...args) {
+  for (let i = 0; i < args.length; i++) {
+    console.log(args[i] + ' is ');
+  }
+}
+
+printArguments('Python', 'fun');
+printArguments('HBTN');
+printArguments();
