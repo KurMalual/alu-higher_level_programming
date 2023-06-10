@@ -1,10 +1,5 @@
 #!/usr/bin/node
-function printArguments(...args) {
-  for (let i = 0; i < args.length; i++) {
-    console.log(args[i] + ' is ');
-  }
-}
-
-printArguments('Python', 'fun');
-printArguments('HBTN');
-printArguments();
+const first = 'Python'
+const second = 'fun'
+const both = first + " is " + second
+console.log(both)
