@@ -1,10 +1,10 @@
 #!/usr/bin/node
+// this script to replace the value 12 with 89
 
 const myObject = {
   type: 'object',
-  valve: 12
+  value: 12
 };
-
 console.log(myObject);
 myObject.value = 89;
 console.log(myObject);
